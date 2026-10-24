@@ -1,0 +1,96 @@
+
+DB_LIVRARIA.sql
+100%
+CREATE DATABASE DB_LIVRARIA;
+
+USE DB_LIVRARIA;
+
+
+-- QUESTÃO 1
+CREATE TABLE AUTOR (
+  id_autor INTEGER PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(100) NOT NULL,
+  nacionalidade VARCHAR(50),
+  data_nascimento DATE
+);
+
+
+-- QUESTÃO 2
+CREATE TABLE EDITORA (
+  id_editora INTEGER PRIMARY KEY AUTO_INCREMENT,
+  nome VARCHAR(100) NOT NULL,
+  endereco VARCHAR(200) NOT NULL,
+  telefone VARCHAR(20)
+);
+
+
+-- QUESTÃO 3
+CREATE TABLE LIVRO (
+  id_livro INTEGER PRIMARY KEY AUTO_INCREMENT,
+  titulo VARCHAR(200) NOT NULL,
+  ano_publicacao YEAR,
+  id_editora INTEGER,
+  id_autor_principal INTEGER,
+
+  FOREIGN KEY (id_editora) REFERENCES EDITORA(id_editora),
+  FOREIGN KEY (id_autor_principal) REFERENCES AUTOR(id_autor)
+);
+
+
+-- QUESTÃO 4
+ALTER TABLE EDITORA
+MODIFY telefone VARCHAR(30);
+
+ALTER TABLE EDITORA
+ADD email VARCHAR(100);
+
+
+-- QUESTÃO 5
+-- DROP TABLE LIVRO;
+
+
+-- QUESTÃO 6
+INSERT INTO AUTOR (nome, nacionalidade, data_nascimento)
+VALUES
+('jhon vale', 'Brasil', '2000-06-21'),
+('theus', 'Brasil', '1912-08-10'),
+('pietro', 'Brasil', '1965-07-31');
+
+
+INSERT INTO EDITORA (nome, endereco, telefone)
+VALUES
+('Editora Brasil', 'Rua A, 100', '71999999999'),
+('Editora Nacional', 'Rua B, 200', '71988888888');
+
+
+-- QUESTÃO 7
+INSERT INTO LIVRO (titulo, ano_publicacao, id_editora, id_autor_principal)
+VALUES
+('Dom Casmurro', 1899, 1, 1),
+('Capitães da Areia', 1937, 2, 2);
+
+
+-- QUESTÃO 8
+UPDATE AUTOR
+SET nacionalidade = 'Brasil'
+WHERE id_autor = 1;
+
+UPDATE EDITORA
+SET telefone = '71977777777'
+WHERE id_editora = 1;
+
+
+-- QUESTÃO 9
+DELETE FROM LIVRO
+WHERE id_editora = 2;
+
+-- CUIDADO: EXECUTAR DELETE OU UPDATE SEM WHERE
+-- PODE ALTERAR OU EXCLUIR TODOS OS REGISTROS DA TABELA.
+
+
+-- QUESTÃO 10
+SELECT * FROM AUTOR;
+
+SELECT titulo, ano_publicacao
+FROM LIVRO;
+Exibindo DB_LIVRARIA.sql…
